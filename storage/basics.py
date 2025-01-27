@@ -1,0 +1,1 @@
+statuses = ["Unavailable", "Available", "Responding", "On Scene"]
