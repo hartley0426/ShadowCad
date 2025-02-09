@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="form-title">Records Management System - Edit Record</h2>
+<div class="form-container">
+    <form action="{{ url_for('edit_bolo', bolo_id=bolo.id) }}" method="POST" class="user-form">
+       <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="input-field" value="{{ bolo.name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="officer">Officer:</label>
+            <input type="text" id="officer" name="officer" class="input-field" value="{{ bolo.officer }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="charges">Charges:</label>
+            <input type="text" id="charges" name="charges" class="input-field" value="{{ bolo.charges }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="narrative">Narrative:</label>
+            <textarea id="narrative" name="narrative" class="input-field">{{ bolo.narrative }}</textarea>
+        </div>
+
+
+        <button type="submit" class="submit-btn">Save Changes</button>
+    </form>
+</div>
+
+{% endblock %}

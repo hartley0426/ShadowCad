@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="form-title">Computer Aided Dispatch - Edit Call</h2>
+<div class="form-container">
+    <form action="{{ url_for('edit_call', call_id=call.id) }}" method="POST" class="user-form">
+        <div class="form-group">
+            <label for="call_status">Status:</label>
+            <select name="call_status" id="call_status" class="input-field dropdown">
+                <option value="Pending" {% if call.call_status == 'Pending' %}selected{% endif %}>Pending</option>
+                <option value="In Progress" {% if call.call_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                <option value="Completed" {% if call.call_status == 'Completed' %}selected{% endif %}>Completed</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" class="input-field" value="{{ call.address }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="call_title">Title:</label>
+            <input type="text" id="call_title" name="call_title" class="input-field" value="{{ call.call_title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="code">Code:</label>
+            <select name="code" id="code" class="input-field dropdown">
+                <option value="Code 1" {% if call.code == 'Code 1' %}selected{% endif %}>Code 1</option>
+                <option value="Code 2" {% if call.code == 'Code 2' %}selected{% endif %}>Code 2</option>
+                <option value="Code 3" {% if call.code == 'Code 3' %}selected{% endif %}>Code 3</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="call_description">Description:</label>
+            <textarea id="call_description" name="call_description" class="input-field">{{ call.call_description }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="attached_units">Attached Units:</label>
+            <select name="attached_units" id="attached_units" class="input-field dropdown" multiple>
+                {% set attached_units_list = call.attached_units.split(', ') if call.attached_units else [] %}
+                {% for unit in users %}
+                    <option value="{{ unit.callsign }}" {% if unit.callsign in attached_units_list %}selected{% endif %}>
+                        {{ unit.callsign }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Save Changes</button>
+    </form>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#attached_units').select2({
+            placeholder: "Select units...",
+            allowClear: true,
+            width: "100%"
+        });
+    });
+</script>
+
+{% endblock %}

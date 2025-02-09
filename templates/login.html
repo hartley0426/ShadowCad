@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="form-title">Computer-Aided Dispatch - Login</h2>
+<div class="form-container">
+    <form action="/login" method="POST" class="user-form">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required class="input-field">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" required class="input-field">
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="extratext">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <button type="submit" class="submit-btn">Login</button>
+    </form>
+</div>
+
+{% endblock %}

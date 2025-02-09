@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Computer-Aided Dispatch - Create a Civilian</h2>
+<div class="form-container">
+    <form action="{{ url_for('create_civilian' )}}" method="POST" class="user-form">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" required class="input-field">
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name" required class="input-field">
+
+        <label for="middle_initial">Middle Initial:</label>
+        <input type="text" name="middle_initial" id="middle_initial" required class="input-field">
+
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" name="date_of_birth" id="date_of_birth" required class="input-field">
+
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age" required class="input-field">
+
+        <label for="sex">Gender:</label>
+        <select name="sex" id="sex" required class="input-field">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="residence">Residence:</label>
+        <input type="text" name="residence" id="residence" required class="input-field">
+
+        <label for="zip_code">Zip Code:</label>
+        <input type="text" name="zip_code" id="zip_code" required class="input-field">
+
+        <label for="occupation">Occupation:</label>
+        <input type="text" name="occupation" id="occupation" required class="input-field">
+
+        <label for="height">Height:</label>
+        <input type="text" name="height" id="height" required class="input-field">
+
+        <label for="weight">Weight:</label>
+        <input type="text" name="weight" id="weight" required class="input-field">
+
+        <label for="skin_tone">Skin Tone:</label>
+        <input type="text" name="skin_tone" id="skin_tone" required class="input-field">
+
+        <label for="hair_color">Hair Color:</label>
+        <select name="hair_color" id="hair_color" required class="input-field">
+            <option value="Black">Black</option>
+            <option value="Blonde">Blonde</option>
+            <option value="Brown">Brown</option>
+            <option value="Red">Red</option>
+            <option value="Grey">Grey</option>
+            <option value="White">White</option>
+            <option value="Bald">Bald</option>
+        </select>
+
+        <label for="eye_color">Eye Color:</label>
+        <select name="eye_color" id="eye_color" required class="input-field">
+            <option value="Black">Black</option>
+            <option value="Blue">Blue</option>
+            <option value="Brown">Brown</option>
+            <option value="Green">Green</option>
+            <option value="Hazel">Hazel</option>
+        </select>
+
+        <button type="submit" class="submit-btn">Create Civilian</button>
+    </form>
+</div>
+
+{% endblock %}

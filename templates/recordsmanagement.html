@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="form-title">Records Management System</h2>
+<div class="menu-container">
+    <div class="menu-grid">
+        <form action="{{ url_for('lookup') }}" method="GET">
+            <button type="submit" class="menu-btn">Records Lookup</button>
+        </form>
+        <form action="{{ url_for('make_arrest') }}" method="GET">
+            <button type="submit" class="menu-btn">Log Arrest</button>
+        </form>
+        <form action="{{ url_for('make_citation') }}" method="GET">
+            <button type="submit" class="menu-btn">Log Citation</button>
+        </form>
+        <form action="{{ url_for('make_bolo') }}" method="GET">
+            <button type="submit" class="menu-btn">Log Bolo</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

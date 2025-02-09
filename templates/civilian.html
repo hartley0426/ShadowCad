@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="form-title">Computer-Aided Dispatch - Civilian View</h2>
+
+<form action="{{ url_for('create_civilian') }}" method="POST">
+    <button type="submit" class="menu-btn">Create Civilian</button>
+</form>
+
+<div class="cad-header">
+    <h3>Your Civilians</h3>
+</div>
+
+{% if civilians %}
+<div class="table-container">
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th class="mi-column">M.I.</th>
+                <th>Last Name</th>
+                <th>DOB</th>
+                <th class="mi-column">Age</th>
+                <th>Gender</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for civilian in civilians %}
+            <tr>
+                <td>{{ civilian.first_name }}</td>
+                <td>{{ civilian.middle_initial }}</td>
+                <td>{{ civilian.last_name }}</td>
+                <td>{{ civilian.date_of_birth }}</td>
+                <td>{{ civilian.age }}</td>
+                <td>{{ civilian.sex }}</td>
+                <td>
+                    <form action="{{ url_for('view_civilian', civilian_id=civilian.id) }}", method="get" style="display: inline;">
+                        <button class="edit-btn">View</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>You have no civilians registered.</p>
+{% endif %}
+
+{% endblock %}

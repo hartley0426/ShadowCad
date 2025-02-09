@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="form-title">Record Management System - New Citation</h2>
+<div class="form-container">
+    <form action="/makecitation" method="POST" class="user-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required class="input-field">
+
+        <label for="arresting_officer">Officer:</label>
+        <input type="text" id="arresting_officer" name="arresting_officer" required class="input-field">
+        
+        <label for="charges">Charges:</label>
+        <input type="text" id="charges" name="charges" required class="input-field">
+
+        <label for="fine">Fine:</label>
+        <input type="text" id="fine" name="fine" required class="input-field">
+
+        <label for="narrative">Narrative:</label>
+        <textarea name="narrative" id="narrative" class="input-field"></textarea>
+        
+        <button type="submit" class="submit-btn">Log Citation</button>
+    </form>
+</div>
+{% endblock %}

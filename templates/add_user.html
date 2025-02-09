@@ -1,18 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Add User</h2>
-<form action="/add" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-    
-    <label for="role">Role:</label>
-    <select id="role" name="role" required>
-        <option value="Dispatch">Dispatch</option>
-        <option value="LEO">LEO</option>
-        <option value="FD">FD</option>
-    </select>
-    
-    <button type="submit">Add User</button>
-</form>
+<h2 class="form-title">Computer Aided Dispatch - Add a Unit</h2>
+<div class="form-container">
+    <form action="/add" method="POST" class="user-form">
+        <div class="form-group">
+            <label for="name">Officer Name:</label>
+            <input type="text" id="name" name="name" required class="input-field">
+        </div>
+
+        <div class="form-group">
+            <label for="callsign">Callsign:</label>
+            <input type="text" id="callsign" name="callsign" required class="input-field callsign-input">
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select id="role" name="role" required class="input-field dropdown">
+                <option value="LEO">LEO</option>
+                <option value="FD">Fire Dept</option>
+                <option value="Dispatch">Dispatch</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="department">Department:</label>
+            <select id="department" name="department" required class="input-field dropdown">
+                <option value="ISP">ISP</option>
+                <option value="WCSO">WCSO</option>
+                <option value="RPD">RPD</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="subdivision">Subdivision:</label>
+            <input type="text" id="subdivision" name="subdivision" class="input-field">
+        </div>
+
+        <div class="form-group">
+            <label for="rank">Rank:</label>
+            <input type="text" id="rank" name="rank" class="input-field">
+        </div>
+
+        <div class="form-group">
+            <label for="aop">Area of Patrol:</label>
+            <input type="text" id="aop" name="aop" class="input-field">
+        </div>
+
+        <button type="submit" class="submit-btn">Add Unit</button>
+    </form>
+</div>
 {% endblock %}

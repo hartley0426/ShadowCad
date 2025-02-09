@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="form-title">Computer-Aided Dispatch - View a Civilian</h2>
+<div class="form-container">
+    <form action="{{ url_for('view_civilian', civilian_id=civilian.id )}}" method="POST" class="user-form">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" value="{{ civilian.first_name }}" class="input-field" disabled>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name" value="{{ civilian.last_name }}" required class="input-field" disabled>
+
+        <label for="middle_initial">Middle Initial:</label>
+        <input type="text" name="middle_initial" id="middle_initial" value="{{ civilian.middle_initial }}" required class="input-field" disabled>
+
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" name="date_of_birth" id="date_of_birth" value="{{ civilian.date_of_birth }}" required class="input-field" disabled>
+
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age" value="{{ civilian.age }}" required class="input-field" disabled>
+
+        <label for="sex">Gender:</label>
+        <input type="text" name="sex" id="sex" value="{{ civilian.sex }}" required class="input-field" disabled>
+
+        <label for="residence">Residence:</label>
+        <input type="text" name="residence" id="residence" value="{{ civilian.residence }}" required class="input-field" disabled>
+
+        <label for="zip_code">Zip Code:</label>
+        <input type="text" name="zip_code" id="zip_code" value="{{ civilian.zip_code }}" required class="input-field" disabled>
+
+        <label for="occupation">Occupation:</label>
+        <input type="text" name="occupation" id="occupation" value="{{ civilian.occupation }}" required class="input-field" disabled>
+
+        <label for="height">Height:</label>
+        <input type="text" name="height" id="height" value="{{ civilian.height }}" required class="input-field" disabled>
+
+        <label for="weight">Weight:</label>
+        <input type="text" name="weight" id="weight" value="{{ civilian.weight }}" required class="input-field" disabled>
+
+        <label for="skin_tone">Skin Tone:</label>
+        <input type="text" name="skin_tone" id="skin_tone" value="{{ civilian.skin_tone }}" required class="input-field" disabled>
+
+        <label for="hair_color">Hair Color:</label>
+        <input type="text" name="hair_color" id="hair_color" value="{{ civilian.hair_color }}" required class="input-field" disabled>
+
+        <label for="eye_color">Hair Color:</label>
+        <input type="text" name="eye_color" id="eye_color" value="{{ civilian.eye_color }}" required class="input-field" disabled>
+
+        <button type="submit" class="submit-btn">Return</button>
+    </form>
+</div>
+
+{% endblock %}

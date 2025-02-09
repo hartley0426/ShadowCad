@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Computer-Aided Dispatch - Account View</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% if current_user.is_authenticated %}
+    <p>Welcome, {{ current_user.username }}!</p>
+    <form action="{{ url_for('logout') }}" method="GET">
+        <button type="submit" class="edit-btn">Logout</button>
+    </form>
+    <form action="{{ url_for('delete_account', account_id=current_user.id) }}" method="POST">
+        <button type="submit" class="remove-btn">Delete Account</button>
+    </form>    
+{% else %}
+    <form action="{{ url_for('login') }}" method="GET">
+        <button type="submit" class="edit-btn">Login</button>
+    </form>
+    <form action="{{ url_for('signup') }}" method="GET">
+        <button type="submit" class="edit-btn">Sign Up</button>
+    </form>
+    
+{% endif %}
+{% endblock %}

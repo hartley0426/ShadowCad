@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Computer-Aided Dispatch - Dispatch View</h2>
+    <div class="cad-header">
+        <h3>Active Units</h3>
+    </div>
+    <div class="table-container">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th class="callsign-column">Callsign</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Subdivision</th>
+                    <th>Rank</th>
+                    <th class="status-column">Status</th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.callsign }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.department }}</td>
+                    <td>{{ user.subdivision }}</td>
+                    <td>{{ user.rank }}</td>
+                    <td class="status-cell">
+                        <form action="{{ url_for('update_status', user_id=user.id) }}" method="POST">
+                            <select 
+                                name="status" 
+                                class="status-dropdown" 
+                                onchange="this.form.submit()"
+                                data-initial-status="{{ user.status }}"
+                            >
+                                <option value="Unavailable" {% if user.status == 'Unavailable' %}selected{% endif %}>Unavailable</option>
+                                <option value="Available" {% if user.status == 'Available' %}selected{% endif %}>Available</option>
+                                <option value="Busy" {% if user.status == 'Busy' %}selected{% endif %}>Busy</option>
+                                <option value="Enroute" {% if user.status == 'Enroute' %}selected{% endif %}>Enroute</option>
+                                <option value="On Scene" {% if user.status == 'On Scene' %}selected{% endif %}>On Scene</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td class="actions-cell">
+                        <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="remove-btn">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="call-container">
+        <h3>Active Calls</h3>
+    </div>
+    <div class="table-container">
+        <table class="call-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Address</th>
+                    <th>Code</th>
+                    <th>Status</th>
+                    <th class="description-column">Description</th>
+                    <th>Attached Units</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for call in calls %}
+                <tr>
+                    <td>{{ call.call_title }}</td>
+                    <td>{{ call.address }}</td>
+                    <td>{{ call.code }}</td>
+                    <td>{{ call.call_status }}</td>
+                    <td>{{ call.call_description }}</td>
+                    <td>{{ call.attached_units }}</td>
+                    <td class="call-actions-column">
+                        <form action="{{ url_for('delete_call', call_id=call.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="remove-btn">Remove</button>
+                        </form>
+                        <form action="{{ url_for('edit_call', call_id=call.id) }}" method="GET" style="display:inline;">
+                            <button type="submit" class="edit-btn">Edit</button>
+                        </form>
+                        <form action="{{ url_for('view_call', call_id=call.id) }}" method="GET" style="display:inline;">
+                            <button type="submit" class="edit-btn">View</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function applyStatusStyles() {
+        const dropdowns = document.querySelectorAll('.status-dropdown');
+        dropdowns.forEach(dropdown => {
+            updateDropdownColor(dropdown, dropdown.value);
+            dropdown.addEventListener('change', (e) => {
+                updateDropdownColor(e.target, e.target.value);
+            });
+        });
+    }
+
+    function updateDropdownColor(dropdown, status) {
+    const colors = {
+        "Unavailable": "#C20318",
+        "Available": "#2CA69A",  
+        "Busy": "#FE6D1F",       
+        "On Scene": "#2DA54A",
+        "Enroute": "#2656A3"
+    };
+
+    const textColors = {
+        "Unavailable": "#FFFFFF",  
+        "Available": "#FFFFFF",    
+        "Busy": "#FFFFFF",         
+        "On Scene": "#FFFFFF",
+        "Enroute": "#FFFFFF"
+    }
+        
+
+    dropdown.style.backgroundColor = colors[status] || "#FFFFFF"; 
+    dropdown.style.color = textColors[status] || "#000000"; 
+}
+
+
+    document.addEventListener('DOMContentLoaded', applyStatusStyles);
+</script>
+
+{% endblock %}

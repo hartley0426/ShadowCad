@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="form-title">Records Management System - Edit Record</h2>
+<div class="form-container">
+    <form action="{{ url_for('edit_record', record_id=record.id) }}" method="POST" class="user-form">
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select name="type" id="type" class="input-field dropdown">
+                <option value="Citation" {% if record.type == 'Citation' %}selected{% endif %}>Citation</option>
+                <option value="Arrest" {% if record.type == 'Arrest' %}selected{% endif %}>Arrest</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="input-field" value="{{ record.name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="arresting_officer">Officer:</label>
+            <input type="text" id="arresting_officer" name="arresting_officer" class="input-field" value="{{ record.arresting_officer }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="charges">Charges:</label>
+            <input type="text" id="charges" name="charges" class="input-field" value="{{ record.charges }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fine">Fine:</label>
+            <input type="text" id="fine" name="fine" class="input-field" value="{{ record.fine }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="sentence">Sentence:</label>
+            <input type="text" id="sentence" name="sentence" class="input-field" value="{{ record.sentence }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="narrative">Narrative:</label>
+            <textarea id="narrative" name="narrative" class="input-field">{{ record.narrative }}</textarea>
+        </div>
+
+
+        <button type="submit" class="submit-btn">Save Changes</button>
+    </form>
+</div>
+
+{% endblock %}

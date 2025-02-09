@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+<h2 class="form-title">Computer-Aided Dispatch - Community Menu</h2>
+
+<div class="menu-container">
+    <div class="menu-grid">
+        <form action="{{ url_for('dispatch') }}" method="GET">
+            <button type="submit" class="menu-btn">Dispatch</button>
+        </form>
+        <form action="{{ url_for('leo') }}" method="GET">
+            <button type="submit" class="menu-btn">Law Enforcement</button>
+        </form>
+        <form action="{{ url_for('civ') }}" method="GET">
+            <button type="submit" class="menu-btn">Civilian</button>
+        </form>
+        <form action="{{ url_for('fd') }}" method="GET">
+            <button type="submit" class="menu-btn">Fire Department</button>
+        </form>
+        <form action="{{ url_for('account') }}" method="GET">
+            <button type="submit" class="menu-btn">Account</button>
+        </form>
+        <form action="{{ url_for('aboutus') }}" method="GET">
+            <button type="submit" class="menu-btn">About Us</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

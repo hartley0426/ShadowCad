@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="form-title">Computer Aided Dispatch - Add New Call</h2>
+<div class="form-container">
+    <form action="/createcall" method="POST" class="user-form">
+        <label for="call_origin">Call Origin:</label>
+        <select id="call_origin" name="call_origin" required class="input-field">
+            <option value="Caller">Caller</option>
+            <option value="Radio Dispatch">Radio Dispatch</option>
+            <option value="Observed">Observed</option>
+            <option value="Walkup">Walkup</option>
+        </select>
+
+        <label for="call_status">Call Status:</label>
+        <select id="call_status" name="call_status" required class="input-field">
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required class="input-field">
+
+        <label for="call_title">Call Title:</label>
+        <input type="text" id="call_title" name="call_title" required class="input-field">
+
+        <label for="code">Code:</label>
+        <select id="code" name="code" required class="input-field">
+            <option value="Code 1">Code 1</option>
+            <option value="Code 2">Code 2</option>
+            <option value="Code 3">Code 3</option>
+        </select>
+
+        <label for="call_description">Call Description:</label>
+        <textarea id="call_description" name="call_description" class="input-field"></textarea>
+
+        <button type="submit" class="submit-btn">Add Call</button>
+    </form>
+</div>
+{% endblock %}

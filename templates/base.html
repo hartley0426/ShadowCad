@@ -2,20 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
     <link rel="stylesheet" href="/static/styles.css">
-    <title>CAD System</title>
+    <title> Illinois State Roleplay | CAD/RMS System</title>
 </head>
 <body>
     <header>
-        <h1>ERLC CAD System</h1>
+        <h1>Illinois State Roleplay | CAD/RMS System</h1>
         <nav>
-            <a href="/">User Info</a>
-            <a href="/add">Add User</a>
+            <ul>
+                <li>
+                    <a href="/account" class="nav-link">Account</a>
+                    <ul>
+                        <li><a href="/login" class="nav-link">Login</a></li>
+                        <li><a href="/signup" class="nav-link">Signup</a></li>
+                        <li><a href="/logout" class="nav-link">Logout</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/" class="nav-link">Community Menu</a>
+                </li>
+                <li>
+                    <a href="/dispatch" class="nav-link">Dispatch</a>
+                    <ul>
+                        <li><a href="/add" class="nav-link">Add User</a></li>
+                        <li><a href="/createcall" class="nav-link">Create Call</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/rms" class="nav-link">Records</a>
+                    <ul>
+                        <li><a href="/lookup" class="nav-link">Lookup</a></li>
+                        <li><a href="/makearrest" class="nav-link">Make Arrest</a></li>
+                        <li><a href="/makecitation" class="nav-link">Make Citation</a></li>
+                        <li><a href="/makebolo" class="nav-link">Make Bolo</a></li>
+                    </ul>
+                </li>
+            </ul>
         </nav>
+        <!-- User Status -->
+        <div class="user-status">
+            {% if current_user.is_authenticated %}
+                <img src="static\user.png" alt="User Icon" class="user-icon">
+                <span>Logged In</span>
+            {% else %}
+                <img src="static\user.png" alt="User Icon" class="user-icon">
+                <span>Logged Out</span>
+            {% endif %}
+        </div>
     </header>
+    
     <main>
-        {% block content %}{% endblock %}
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 </body>
 </html>

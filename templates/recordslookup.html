@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="form-title">Records Lookup</h2>
+
+<!-- Search Form -->
+<div class="form-container">
+    <form action="/lookup" method="POST" class="user-form">
+        <label for="name">Enter Name:</label>
+        <input type="text" id="name" name="name" required class="input-field">
+        <button type="submit" class="submit-btn">Search</button>
+    </form>
+</div>
+
+<!-- Results -->
+
+<div class="bolo-container">
+    <h3 class="bolo-header">Active BOLOs</h3>
+</div>
+
+{% if bolos is not none %}
+    {% if bolos %}
+        
+        
+        <table class="records-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Officer</th>
+                    <th>Charges</th>
+                    <th>Narrative</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bolo in bolos %}
+                <tr>
+                    <td>{{ bolo.name }}</td>
+                    <td>{{ bolo.officer }}</td>
+                    <td>{{ bolo.charges }}</td>
+                    <td>{{ bolo.narrative }}</td>
+                    <td class="actions-cell">
+                        <form action="{{ url_for('edit_bolo', bolo_id=bolo.id) }}" method="POST" class="user-form" style="display: inline;">
+                            <button type="submit" class="edit-btn">Edit</button>
+                        </form>
+                        <form action="{{ url_for('void_bolo', bolo_id=bolo.id) }}" method="POST" class="user-form" style="display: inline;">
+                            <button type="submit" class="remove-btn">Void</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+    <div class="bolo-info-container">
+        <h3 class="bolo-text">No BOLOs for this name</h3>
+    </div>
+    {% endif %}
+{% endif %}
+
+<div class="bolo-container">
+    <h3 class="bolo-header">Record Results</h3>
+</div>
+
+{% if records is not none %}
+
+    {% if records %}
+        <table class="records-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Arresting Officer</th>
+                    <th>Charges</th>
+                    <th>Sentence</th>
+                    <th>Fine</th>
+                    <th class="narrative-column">Narrative</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.type }}</td>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.arresting_officer }}</td>
+                    <td>{{ record.charges }}</td>
+                    <td>{{ record.sentence }}</td>
+                    <td>${{ record.fine }}</td>
+                    <td>{{ record.narrative }}</td>
+                    <td class="actions-cell">
+                        <form action="{{ url_for('edit_record', record_id=record.id) }}" method="POST" class="user-form" style="display: inline;">
+                            <button type="submit" class="edit-btn">Edit</button>
+                        </form>
+                        <form action="{{ url_for('void_record', record_id=record.id) }}" method="POST" class="user-form" style="display: inline;">
+                            <button type="submit" class="remove-btn">Void</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+    <div class="bolo-info-container">
+        <h3 class="bolo-text">No Records for this name</h3>
+    </div>
+    {% endif %}
+{% endif %}
+
+{% endblock %}
