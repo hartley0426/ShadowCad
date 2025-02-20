@@ -1,11 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 
 {% block content %}
-<h2 class="form-title">Record Management System - New Arrest</h2>
+
+<h2 class="form-title">Records Management System - Make Arrest</h2>
+
 <div class="form-container">
-    <form action="/makearrest" method="POST" class="user-form">
+    <form method="POST" action="{{ url_for('make_personal_arrest', user_id=user.id) }}" class="user-form">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required class="input-field">
+        <input type="text" name="name" id="name" class="input-field" disabled value="{{ username }}">
 
         <label for="arresting_officer">Arresting Officer:</label>
         <input type="text" id="arresting_officer" name="arresting_officer" required class="input-field">
@@ -25,4 +28,5 @@
         <button type="submit" class="submit-btn">Log Arrest</button>
     </form>
 </div>
+
 {% endblock %}

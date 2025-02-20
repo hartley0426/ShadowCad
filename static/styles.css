@@ -339,7 +339,10 @@ button {
     text-transform: uppercase;
     font-weight: bold;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
 }
+
+
 
 .input-field:focus, .dropdown:focus {
     outline: none;

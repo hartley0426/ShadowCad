@@ -148,13 +148,14 @@ def rms():
 def lookup():
     records = None
     bolos = None
+    name=None
 
     if request.method == 'POST':
         name = request.form['name']
         records = Record.query.filter(Record.name.ilike(f"%{name}%")).all()
         bolos = Bolo.query.filter(Bolo.name.ilike(f"%{name}%")).all()
 
-    return render_template('recordslookup.html', records=records, bolos=bolos)
+    return render_template('recordslookup.html', records=records, bolos=bolos, name=name)
 
 @app.route('/makearrest', methods=['GET', 'POST'])
 def make_arrest():
@@ -183,6 +184,36 @@ def make_arrest():
         return redirect(url_for('dispatch'))
     
     return render_template('makearrest.html')
+
+@app.route('/makepersonalarrest/<int:user_id>', methods=['GET', 'POST'])
+def make_personal_arrest(username):
+
+    if request.method == 'POST':
+        name = username
+        type = "Arrest"
+        arresting_officer = request.form['arresting_officer']
+        charges = request.form['charges']
+        narrative = request.form['narrative']
+        fine = request.form['fine']
+        sentence = request.form['sentence']
+
+        new_arrest = Record(
+            name=name,  
+            type=type,
+            arresting_officer = arresting_officer,
+            charges = charges,
+            narrative = narrative,
+            fine = fine,
+            sentence = sentence
+        )
+
+        db.session.add(new_arrest)
+        db.session.commit()
+
+        return redirect(url_for('rms'))
+    
+    return render_template('makepersonalarrest.html', username=username)
+
 
 @app.route('/makecitation', methods=['GET', 'POST'])
 def make_citation():
